@@ -59,7 +59,7 @@ export default function Home() {
 
   return (
     
-    <main className="flex min-h-screen flex-col items-center justify-center p-4 md:p-24">
+    <main className="flex min-h-screen flex-col items-center justify-center p-4 mb-3">
       
       <h1 className="text-6xl font-bold mb-6 text-center">
         Welcome to AI-Powered Gallery
