@@ -1,3 +1,5 @@
+"use client"
+
 import AddImage from "@/components/AddImage";
 import Home from "@/components/Home";
 import { MainNav } from "@/components/Navbar";
@@ -14,14 +16,37 @@ import Link from "next/link";
 import DashboardPage from "./dashboard/page";
 import MainHome from "../components/ui/mainhome";
 import Footer from "@/components/ui/Footer";
-export default async function Main() {
+import { useState , useEffect } from "react"
+import AIPreloader from "@/components/ai-preloader"
+// import { usePreloader } from "@/hooks/use-preloader"
+
+export default function Main() {
+  const [loading, setLoading] = useState(true);
+  // const { loading, handleLoadComplete } = usePreloader()
+
+ // Simulate loading completion after a delay
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000); // 3 seconds
+
+    return () => clearTimeout(timer); // Cleanup the timer on component unmount
+  }, []);
+
   return (
-    <>
-    
-      {/* <DashboardPage /> */}
-      {/* <Home />  */}
+    <main className="min-h-screen">
+    {loading && (
+    <AIPreloader
+    onLoadComplete={() => setLoading(false)} // Wrap setLoading in a function
+    duration={4000} // Increased duration to show off animations
+  />
+    )}
+
+    {/* Your actual website content */}
+    <div className="container mx-auto py-12 px-4">
       <MainHome />
-      {/* <Footer /> */}
-    </>
+    </div>
+  </main>
+    //  <MainHome />
   );
 }
