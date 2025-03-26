@@ -9,7 +9,7 @@ import Instructor from "@instructor-ai/instructor";
 export async function POST(req: Request, res: Response) {
   try {
     const openai = new OpenAI({
-      apiKey: "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",
+      apiKey: "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",
     });
 
     const body = await req.json();

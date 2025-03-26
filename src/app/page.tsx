@@ -38,7 +38,7 @@ export default function Main() {
     {loading && (
     <AIPreloader
     onLoadComplete={() => setLoading(false)} // Wrap setLoading in a function
-    duration={4000} // Increased duration to show off animations
+    duration={5000} // Increased duration to show off animations
   />
     )}
 

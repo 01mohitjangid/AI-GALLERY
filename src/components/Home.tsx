@@ -232,11 +232,11 @@ const Home = () => {
                             >
                               View image
                             </a>
-                            <button
+                            {/* <button
                               onClick={() => downloadImage(image.imageUrl)}
                             >
                               Download
-                            </button>
+                            </button> */}
                           </div>
                           <DwnButton />
                         </TableCell>
