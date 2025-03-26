@@ -2,7 +2,21 @@
 
 import { useEffect, useState, useRef } from "react"
 import { motion, useAnimation, AnimatePresence } from "framer-motion"
-import { Brain, Sparkles, Zap, Activity, Cpu, Code, Server, Network } from "lucide-react"
+import {
+  Brain,
+  Sparkles,
+  Zap,
+  Activity,
+  Cpu,
+  Code,
+  Server,
+  Network,
+  Database,
+  Cloud,
+  Wifi,
+  Globe,
+  Layers,
+} from "lucide-react"
 
 interface AIPreloaderProps {
   onLoadComplete?: () => void
@@ -24,6 +38,16 @@ export default function AIPreloader({
   >([])
   const [isHovering, setIsHovering] = useState(false)
   const [textIndex, setTextIndex] = useState(0)
+  const [pulseRings, setPulseRings] = useState<Array<{ id: number; scale: number; opacity: number }>>([])
+  const [energyBeams, setEnergyBeams] = useState<Array<{ id: number; angle: number; length: number; opacity: number }>>(
+    [],
+  )
+  const [dataNodes, setDataNodes] = useState<Array<{ id: number; x: number; y: number; size: number; icon: number }>>(
+    [],
+  )
+  const [showSparkEffect, setShowSparkEffect] = useState(false)
+  const [rotationAngle, setRotationAngle] = useState(0)
+
   const loadingPhrases = [
     "Initializing neural networks",
     "Calibrating AI models",
@@ -33,6 +57,10 @@ export default function AIPreloader({
     "Connecting neural pathways",
     "Activating deep learning modules",
     "Processing cognitive functions",
+    "Enhancing pattern recognition",
+    "Bootstrapping machine learning",
+    "Analyzing data structures",
+    "Integrating AI frameworks",
   ]
 
   // Handle mouse movement for interactive effects
@@ -70,7 +98,8 @@ export default function AIPreloader({
   useEffect(() => {
     const createParticles = () => {
       const newParticles = []
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 50; i++) {
+        // Increased from 30 to 50
         newParticles.push({
           id: i,
           x: Math.random() * window.innerWidth,
@@ -130,6 +159,118 @@ export default function AIPreloader({
     }
   }, [mousePosition])
 
+  // NEW ANIMATION 1: Pulse rings effect
+  useEffect(() => {
+    const createPulseRing = () => {
+      const newRing = {
+        id: Date.now(),
+        scale: 1,
+        opacity: 0.8,
+      }
+      setPulseRings((prev) => [...prev, newRing])
+    }
+
+    const pulseInterval = setInterval(() => {
+      createPulseRing()
+    }, 2000)
+
+    const updateRings = setInterval(() => {
+      setPulseRings((prevRings) =>
+        prevRings
+          .map((ring) => ({
+            ...ring,
+            scale: ring.scale + 0.2,
+            opacity: ring.opacity - 0.05,
+          }))
+          .filter((ring) => ring.opacity > 0),
+      )
+    }, 100)
+
+    return () => {
+      clearInterval(pulseInterval)
+      clearInterval(updateRings)
+    }
+  }, [])
+
+  // NEW ANIMATION 2: Energy beams
+  useEffect(() => {
+    const createEnergyBeam = () => {
+      const newBeam = {
+        id: Date.now(),
+        angle: Math.random() * Math.PI * 2,
+        length: 100 + Math.random() * 150,
+        opacity: 0.7,
+      }
+      setEnergyBeams((prev) => [...prev.slice(-8), newBeam])
+    }
+
+    const beamInterval = setInterval(() => {
+      createEnergyBeam()
+    }, 800)
+
+    const updateBeams = setInterval(() => {
+      setEnergyBeams((prevBeams) =>
+        prevBeams
+          .map((beam) => ({
+            ...beam,
+            length: beam.length + 5,
+            opacity: beam.opacity - 0.02,
+          }))
+          .filter((beam) => beam.opacity > 0),
+      )
+    }, 100)
+
+    return () => {
+      clearInterval(beamInterval)
+      clearInterval(updateBeams)
+    }
+  }, [])
+
+  // NEW ANIMATION 3: Data nodes
+  useEffect(() => {
+    const createDataNode = () => {
+      const newNode = {
+        id: Date.now(),
+        x: (Math.random() - 0.5) * 300,
+        y: (Math.random() - 0.5) * 300,
+        size: 20 + Math.random() * 20,
+        icon: Math.floor(Math.random() * 5),
+      }
+      setDataNodes((prev) => [...prev.slice(-12), newNode])
+    }
+
+    const nodeInterval = setInterval(() => {
+      createDataNode()
+    }, 1500)
+
+    return () => {
+      clearInterval(nodeInterval)
+    }
+  }, [])
+
+  // NEW ANIMATION 4: Spark effect
+  useEffect(() => {
+    const sparkInterval = setInterval(() => {
+      setShowSparkEffect(true)
+      setTimeout(() => setShowSparkEffect(false), 300)
+    }, 3000)
+
+    return () => {
+      clearInterval(sparkInterval)
+    }
+  }, [])
+
+  // NEW ANIMATION 5: Rotation effect
+  useEffect(() => {
+    const rotateInterval = setInterval(() => {
+      setRotationAngle((prev) => prev + 1)
+    }, 50)
+
+    return () => {
+      clearInterval(rotateInterval)
+    }
+  }, [])
+
   // Helper function to generate random colors
   const getRandomColor = (opacity = 1) => {
     const colors = [
@@ -138,6 +279,8 @@ export default function AIPreloader({
       `rgba(79, 70, 229, ${opacity})`, // Indigo
       `rgba(59, 130, 246, ${opacity})`, // Blue
       `rgba(236, 72, 153, ${opacity})`, // Pink
+      `rgba(14, 165, 233, ${opacity})`, // Sky blue (new)
+      `rgba(20, 184, 166, ${opacity})`, // Teal (new)
     ]
     return colors[Math.floor(Math.random() * colors.length)]
   }
@@ -211,13 +354,11 @@ export default function AIPreloader({
   // Neural network connection lines
   const generateConnections = () => {
     const connections = []
-    const numConnections = 12 // Increased from 8 to 12 for more connections
+    const numConnections = 16 // Increased from 12 to 16
 
     for (let i = 0; i < numConnections; i++) {
       const angle = (i / numConnections) * Math.PI * 2
-      const length = 140 + Math.random() * 40 // Increased length for larger brain
-      const x = Math.cos(angle) * length
-      const y = Math.sin(angle) * length
+      const length = 160 + Math.random() * 60 // Increased length for larger brain
 
       connections.push(
         <motion.div
@@ -250,13 +391,14 @@ export default function AIPreloader({
   // Generate orbiting elements
   const generateOrbitingElements = () => {
     const elements = []
-    const numElements = 4
-    const icons = [Code, Server, Network, Activity]
+    const numElements = 8 // Increased from 4 to 8
+    const icons = [Code, Server, Network, Activity, Database, Cloud, Wifi, Globe]
 
     for (let i = 0; i < numElements; i++) {
       const Icon = icons[i]
       const angle = (i / numElements) * Math.PI * 2
       const delay = i * 0.5
+      const orbitRadius = 150 + (i % 2) * 40 // Varied orbit radius
 
       elements.push(
         <motion.div
@@ -273,8 +415,16 @@ export default function AIPreloader({
             boxShadow: "0 0 10px rgba(168, 85, 247, 0.3)",
           }}
           animate={{
-            x: [Math.cos(angle) * 120, Math.cos(angle + Math.PI * 2) * 120],
-            y: [Math.sin(angle) * 120, Math.sin(angle + Math.PI * 2) * 120],
+            x: [
+              Math.cos(angle) * orbitRadius,
+              Math.cos(angle + Math.PI) * orbitRadius,
+              Math.cos(angle + Math.PI * 2) * orbitRadius,
+            ],
+            y: [
+              Math.sin(angle) * orbitRadius,
+              Math.sin(angle + Math.PI) * orbitRadius,
+              Math.sin(angle + Math.PI * 2) * orbitRadius,
+            ],
             scale: [1, 1.2, 1],
             opacity: [0.7, 1, 0.7],
           }}
@@ -328,6 +478,67 @@ export default function AIPreloader({
           />
         ))}
 
+        {/* NEW ANIMATION 1: Pulse rings */}
+        {pulseRings.map((ring) => (
+          <motion.div
+            key={`ring-${ring.id}`}
+            className="absolute rounded-full border-2 border-purple-500/50"
+            style={{
+              width: `${ring.scale * 300}px`,
+              height: `${ring.scale * 300}px`,
+              opacity: ring.opacity,
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+          />
+        ))}
+
+        {/* NEW ANIMATION 2: Energy beams */}
+        {energyBeams.map((beam) => (
+          <motion.div
+            key={`beam-${beam.id}`}
+            className="absolute h-1 bg-gradient-to-r from-purple-600 via-purple-400 to-transparent"
+            style={{
+              width: beam.length,
+              left: "50%",
+              top: "50%",
+              opacity: beam.opacity,
+              transformOrigin: "0 0",
+              transform: `rotate(${beam.angle}rad) translateY(-0.5px)`,
+            }}
+          />
+        ))}
+
+        {/* NEW ANIMATION 3: Data nodes */}
+        {dataNodes.map((node) => {
+          const icons = [Database, Cloud, Layers, Cpu, Globe]
+          const Icon = icons[node.icon]
+          return (
+            <motion.div
+              key={`node-${node.id}`}
+              className="absolute rounded-full bg-purple-900/30 flex items-center justify-center"
+              style={{
+                width: node.size,
+                height: node.size,
+                left: "50%",
+                top: "50%",
+                transform: `translate(calc(-50% + ${node.x}px), calc(-50% + ${node.y}px))`,
+              }}
+              animate={{
+                opacity: [0, 0.8, 0],
+                scale: [0.5, 1, 0.5],
+              }}
+              transition={{
+                duration: 4,
+                ease: "easeInOut",
+              }}
+            >
+              <Icon className="w-6 h-6 text-purple-300" />
+            </motion.div>
+          )
+        })}
+
         {/* Interactive background glow */}
         <motion.div
           className="absolute inset-0 bg-gradient-radial from-purple-500/20 to-transparent"
@@ -371,7 +582,7 @@ export default function AIPreloader({
         {/* Orbiting elements */}
         <div className="absolute inset-0 flex items-center justify-center">{generateOrbitingElements()}</div>
 
-        {/* Main brain animation */}
+        {/* Main brain animation - CENTERED */}
         <motion.div
           className="relative z-10"
           initial={{ scale: 0.8, opacity: 0 }}
@@ -386,9 +597,15 @@ export default function AIPreloader({
             repeat: Number.POSITIVE_INFINITY,
             ease: "easeInOut",
           }}
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
         >
           <motion.div
-            className="absolute -inset-24 rounded-full bg-purple-500/20 blur-xl"
+            className="absolute -inset-32 rounded-full bg-purple-500/20 blur-xl"
             animate={{
               scale: [1, 1.2, 1],
               opacity: [0.5, 0.8, 0.5],
@@ -400,12 +617,28 @@ export default function AIPreloader({
             }}
           />
 
+          {/* NEW ANIMATION 4: Spark effect */}
+          {showSparkEffect && (
+            <motion.div
+              className="absolute -inset-16 rounded-full"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: [0, 1, 0], scale: [0.5, 1.5, 0.5] }}
+              transition={{ duration: 0.3 }}
+              style={{
+                background: "radial-gradient(circle, rgba(236,72,153,0.6) 0%, rgba(168,85,247,0) 70%)",
+              }}
+            />
+          )}
+
           <motion.div
-            className="relative bg-slate-800/80 backdrop-blur-sm p-16 rounded-full border border-purple-500/30 shadow-lg"
+            className="relative bg-slate-800/80 backdrop-blur-sm p-20 rounded-full border border-purple-500/30 shadow-lg"
             whileHover={{ scale: 1.05 }}
             onHoverStart={() => setIsHovering(true)}
             onHoverEnd={() => setIsHovering(false)}
             transition={{ type: "spring", stiffness: 300 }}
+            style={{
+              transform: `rotate(${rotationAngle * 0.05}deg)`, // NEW ANIMATION 5: Subtle rotation
+            }}
           >
             <motion.div
               className="absolute inset-0 rounded-full"
@@ -438,9 +671,9 @@ export default function AIPreloader({
                   delay: 0.5,
                 }}
               >
-                <Brain className="w-40 h-40" /> {/* Increased from 24 to 32 */}
+                <Brain className="w-48 h-48" /> {/* Increased from 40 to 48 */}
               </motion.div>
-              <Brain className="w-40 h-40 text-purple-400 relative z-10" /> {/* Increased from 24 to 32 */}
+              <Brain className="w-48 h-48 text-purple-400 relative z-10" /> {/* Increased from 40 to 48 */}
               {/* CPU icon in the center of the brain */}
               <motion.div
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-purple-300"
@@ -455,7 +688,7 @@ export default function AIPreloader({
                   ease: "linear",
                 }}
               >
-                <Cpu className="w-12 h-12" /> {/* Increased from 8 to 10 */}
+                <Cpu className="w-16 h-16" /> {/* Increased from 12 to 16 */}
               </motion.div>
             </motion.div>
 
@@ -508,7 +741,7 @@ export default function AIPreloader({
                 delay: 0.5,
               }}
             >
-              <Sparkles className="w-12 h-12 text-purple-300" /> {/* Increased from 8 to 10 */}
+              <Sparkles className="w-16 h-16 text-purple-300" /> {/* Increased from 12 to 16 */}
             </motion.div>
 
             <motion.div
@@ -524,7 +757,7 @@ export default function AIPreloader({
                 ease: "easeInOut",
               }}
             >
-              <Zap className="w-12 h-12 text-purple-300" /> {/* Increased from 8 to 10 */}
+              <Zap className="w-16 h-16 text-purple-300" /> {/* Increased from 12 to 16 */}
             </motion.div>
 
             <motion.div
@@ -541,20 +774,38 @@ export default function AIPreloader({
                 delay: 0.3,
               }}
             >
-              <Activity className="w-12 h-12 text-purple-300" /> {/* Increased from 8 to 10 */}
+              <Activity className="w-16 h-16 text-purple-300" /> {/* Increased from 12 to 16 */}
+            </motion.div>
+
+            {/* NEW: Additional decorative icons */}
+            <motion.div
+              className="absolute -top-2 -left-2"
+              animate={{
+                scale: [1, 1.2, 1],
+                rotate: [0, -15, 0],
+                opacity: [0.7, 1, 0.7],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Number.POSITIVE_INFINITY,
+                ease: "easeInOut",
+                delay: 0.7,
+              }}
+            >
+              <Database className="w-16 h-16 text-purple-300" />
             </motion.div>
           </motion.div>
         </motion.div>
 
         {/* Loading text and dots */}
         <motion.div
-          className="mt-16 text-center z-10" /* Increased margin-top from 12 to 16 */
+          className="mt-16 text-center z-10 absolute bottom-32" /* Positioned at bottom for better layout */
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
           <motion.h2
-            className="text-2xl font-medium text-white mb-1 mt-14"
+            className="text-2xl font-medium text-white mb-1"
             animate={{
               color: ["#f3e8ff", "#d8b4fe", "#f3e8ff"],
             }}
@@ -580,28 +831,34 @@ export default function AIPreloader({
           </motion.div>
 
           <div className="flex justify-center space-x-3 mt-2">
-            {[0, 1, 2].map((i) => (
-              <motion.div
-                key={i}
-                className="w-3 h-3 rounded-full bg-purple-400"
-                animate={{
-                  scale: [1, 1.5, 1],
-                  opacity: [0.5, 1, 0.5],
-                  y: [0, -10, 0],
-                  boxShadow: [
-                    "0 0 0px rgba(168, 85, 247, 0.5)",
-                    "0 0 10px rgba(168, 85, 247, 0.8)",
-                    "0 0 0px rgba(168, 85, 247, 0.5)",
-                  ],
-                }}
-                transition={{
-                  duration: 1.2,
-                  repeat: Number.POSITIVE_INFINITY,
-                  delay: i * 0.2,
-                  ease: "easeInOut",
-                }}
-              />
-            ))}
+            {[0, 1, 2, 3, 4].map(
+              (
+                i, // Added 2 more dots
+              ) => (
+                <motion.div
+                  key={i}
+                  className="w-3 h-3 rounded-full bg-purple-400"
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.5, 1, 0.5],
+                    y: [0, -10, 0],
+                    boxShadow: [
+                      "0 0 0px rgba(168, 85, 247, 0.5)",
+                      "0 0 10px rgba(168, 85, 247, 0.8)",
+                      "0 0 0px rgba(168, 85, 247, 0.85,247,0.5)",
+                      "0 0 10px rgba(168, 85, 247, 0.8)",
+                      "0 0 0px rgba(168, 85, 247, 0.5)",
+                    ],
+                  }}
+                  transition={{
+                    duration: 1.2,
+                    repeat: Number.POSITIVE_INFINITY,
+                    delay: i * 0.2,
+                    ease: "easeInOut",
+                  }}
+                />
+              ),
+            )}
           </div>
 
           {/* Progress percentage */}
@@ -617,21 +874,21 @@ export default function AIPreloader({
 
         {/* Progress bar container with glow effect */}
         <motion.div
-          className="absolute bottom-0 left-0 right-0 h-3 bg-slate-800/50 backdrop-blur-sm"
+          className="absolute bottom-0 left-0 right-0 h-4 bg-slate-800/50 backdrop-blur-sm" /* Increased height from 3 to 4 */
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
           {/* Progress bar */}
           <motion.div
-            className="absolute bottom-0 left-0 h-3 bg-gradient-to-r from-purple-600 via-purple-400 to-purple-600"
+            className="absolute bottom-0 left-0 h-4 bg-gradient-to-r from-purple-600 via-purple-400 to-purple-600" /* Increased height from 3 to 4 */
             style={{ width: `${progress}%` }}
             transition={{ duration: 0.1, ease: "linear" }}
           />
 
           {/* Progress bar inner glow */}
           <motion.div
-            className="absolute bottom-0 left-0 h-3 bg-gradient-to-r from-purple-500/0 via-purple-300/50 to-purple-500/0"
+            className="absolute bottom-0 left-0 h-4 bg-gradient-to-r from-purple-500/0 via-purple-300/50 to-purple-500/0" /* Increased height from 3 to 4 */
             style={{ width: `${progress}%` }}
             animate={{
               opacity: [0.3, 0.7, 0.3],
@@ -646,7 +903,7 @@ export default function AIPreloader({
 
         {/* Pulsing circle at progress bar end */}
         <motion.div
-          className="absolute bottom-1.5 h-6 w-6 rounded-full bg-purple-400 shadow-lg shadow-purple-500/50"
+          className="absolute bottom-2 h-8 w-8 rounded-full bg-purple-400 shadow-lg shadow-purple-500/50" /* Increased size from 6x6 to 8x8 */
           style={{
             left: `${progress}%`,
             translateX: "-50%",
@@ -670,7 +927,7 @@ export default function AIPreloader({
 
         {/* Sharper circle on top of the blurred one */}
         <motion.div
-          className="absolute bottom-1.5 h-4 w-4 rounded-full bg-purple-300"
+          className="absolute bottom-2 h-6 w-6 rounded-full bg-purple-300" /* Increased size from 4x4 to 6x6 */
           style={{
             left: `${progress}%`,
             translateX: "-50%",
