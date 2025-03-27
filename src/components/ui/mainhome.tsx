@@ -191,6 +191,10 @@ export default function Home() {
           <Link href="sign-up">Get Started for Free</Link>
         </Button>
       </section>
+        <Button asChild size="lg">
+          <Link href="MemoryMatchGame">FREE GAME</Link>
+        </Button>
+      
     </main>
   );
 }
