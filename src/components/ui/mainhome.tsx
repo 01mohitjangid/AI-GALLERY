@@ -76,7 +76,7 @@ export default function Home() {
       </p>
 
       <Button asChild className="mb-10">
-        <Link href="upload-image">Start Uploading Images</Link>
+        <Link href="Image-enhancer">ENHANCE IMAGE </Link>
       </Button>
 
       <section className="w-full max-w-4xl mb-16">
@@ -96,6 +96,7 @@ export default function Home() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           <div>
+            
             <div className="text-4xl mb-4">1. Upload</div>
             <p>Simply upload your image to our AI-powered gallery.</p>
           </div>
@@ -191,6 +192,10 @@ export default function Home() {
           <Link href="sign-up">Get Started for Free</Link>
         </Button>
       </section>
+        <Button asChild size="lg">
+          <Link href="MemoryMatchGame">FREE GAME</Link>
+        </Button>
+      
     </main>
   );
 }
