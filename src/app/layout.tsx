@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/toaster";
 import TanstackQuery from "@/providers/TanstackQuery";
 import { MainNav } from "@/components/Navbar";
 import Footer from "@/components/ui/Footer";
+import { GreenTextSelection } from "@/components/green-text-selection";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
         <html lang="en" suppressHydrationWarning>
           <body className={inter.className}>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <GreenTextSelection />
               <MainNav />
               {children}
               <Footer />
