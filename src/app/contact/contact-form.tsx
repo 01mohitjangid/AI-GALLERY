@@ -132,6 +132,10 @@ export default function ContactForm({ className }: ContactFormProps) {
                       AI Consultation
                     </SelectItem>
                     <SelectItem value="other">Other</SelectItem>
+                    <SelectItem value="prompt-review">Prompt Review</SelectItem>
+                    <SelectItem value="ai-model-training">
+                      AI Model Training
+                    </SelectItem>
                   </SelectContent>
                 </Select>
               </div>

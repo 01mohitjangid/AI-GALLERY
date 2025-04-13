@@ -28,7 +28,7 @@ export default function Main() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 3000); // 3 seconds
+    }, 4000); // 3 seconds
 
     return () => clearTimeout(timer); // Cleanup the timer on component unmount
   }, []);

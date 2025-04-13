@@ -42,7 +42,7 @@ export default function RazorpayCheckout({ paymentData, onSuccess, onCancel }: R
       key: paymentData.keyId,
       amount: paymentData.amount,
       currency: paymentData.currency,
-      name: "Your Company Name",
+      name: "NEURAGALLERY",
       description: paymentData.description,
       order_id: paymentData.orderId,
       handler: async (response: any) => {
