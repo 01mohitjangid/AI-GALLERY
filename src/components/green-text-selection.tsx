@@ -4,7 +4,7 @@ export function GreenTextSelection() {
   return (
     <style jsx global>{`
       ::selection {
-        background-color: #042f2e; /* Corrected with # */
+        background-color: #195634; 
         color: #ffffff; /* White text */
       }
     `}</style>

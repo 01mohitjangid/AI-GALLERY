@@ -12,6 +12,14 @@ import Generator from '../../../asset/gallery-section/Story Generator.jpg'
 import Particle from '../../../asset/gallery-section/Particle Flow.jpg'
 import Link from 'next/link'
 
+type GalleryItem = {
+  id: number;
+  title: string;
+  category: string;
+  image: string;
+  likes: number;
+};
+
 const categories = ["All", "Images", "Art", "3D", "Animation", "Text"]
 
 const galleryItems = [
@@ -65,6 +73,8 @@ export default function MainSection() {
   const [currentPage, setCurrentPage] = useState(0)
   const itemsPerPage = 6
   const particlesRef = useRef<HTMLDivElement>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null)
 
   useEffect(() => {
     if (activeCategory === "All") {
@@ -74,6 +84,7 @@ export default function MainSection() {
     }
     setCurrentPage(0)
   }, [activeCategory])
+
 
   useEffect(() => {
     if (!particlesRef.current) return
@@ -120,6 +131,25 @@ export default function MainSection() {
       setCurrentPage((prev) => prev - 1)
     }
   }
+
+  const downloadImage = (url: string, filename: string) => {
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const openModal = (item: GalleryItem) => {
+    setSelectedItem(item);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedItem(null);
+  };
 
   return (
     <>
@@ -297,6 +327,7 @@ export default function MainSection() {
                               size="icon"
                               variant="ghost"
                               className="h-8 w-8 text-white hover:text-purple-300 hover:bg-purple-950/50"
+                              onClick={() => downloadImage(item.image, item.title.replace(/\s+/g, '_') + '.jpg')}
                             >
                               <Download size={16} />
                             </Button>
@@ -321,6 +352,7 @@ export default function MainSection() {
                       variant="ghost"
                       size="sm"
                       className="text-purple-400 hover:text-purple-300 hover:bg-purple-950/30"
+                      onClick={() => openModal(item)}
                     >
                       View Details
                     </Button>
@@ -368,6 +400,17 @@ export default function MainSection() {
           )}
         </div>
       </section>
+
+      {isModalOpen && selectedItem && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h2 className="text-xl font-bold mb-4 text-black">{selectedItem.title}</h2>
+            <p className="mb-4 text-black">Category: {selectedItem.category}</p>
+            <p className="mb-4 text-black">Likes: {selectedItem.likes}</p>
+            <Button onClick={closeModal} className="bg-purple-600 hover:bg-purple-700 text-white">Close</Button>
+          </div>
+        </div>
+      )}
     </>
   )
 }
