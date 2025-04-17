@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import Avataar from "../../../asset/avatar1.jpeg";
 import Avataar2 from "../../../asset/avatar2.jpeg";
 import Avataar3 from "../../../asset/avatar3.jpeg";
-import FeatureCard from "@/components/feature-card";
+import FeatureCard from "@/components/featureCard";
 import PricingSection from "@/app/payment/pricing-action";
 import PromptingIsAllYouNeed from "@/components/prompting";
 import { useRouter } from "next/navigation";
