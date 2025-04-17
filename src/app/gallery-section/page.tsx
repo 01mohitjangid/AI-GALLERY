@@ -75,6 +75,8 @@ export default function MainSection() {
   const particlesRef = useRef<HTMLDivElement>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null)
+  const [popupMessage, setPopupMessage] = useState<string | null>(null)
+  const [likedItems, setLikedItems] = useState<Set<number>>(new Set())
 
   useEffect(() => {
     if (activeCategory === "All") {
@@ -149,6 +151,33 @@ export default function MainSection() {
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedItem(null);
+  };
+
+  const generateShareableLink = (item: GalleryItem) => {
+    const baseUrl = window.location.origin;
+    return `${baseUrl}/gallery/${item.id}`;
+  };
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setPopupMessage('Link copied to clipboard successfully!');
+      setTimeout(() => setPopupMessage(null), 3000);
+    }, (err) => {
+      console.error('Could not copy text: ', err);
+      setPopupMessage('Failed to copy link.');
+      setTimeout(() => setPopupMessage(null), 3000);
+    });
+  };
+
+  const handleLike = (itemId: number) => {
+    if (!likedItems.has(itemId)) {
+      setVisibleItems((prevItems) =>
+        prevItems.map((item) =>
+          item.id === itemId ? { ...item, likes: item.likes + 1 } : item
+        )
+      );
+      setLikedItems((prevLikedItems) => new Set(prevLikedItems).add(itemId));
+    }
   };
 
   return (
@@ -320,6 +349,8 @@ export default function MainSection() {
                               size="icon"
                               variant="ghost"
                               className="h-8 w-8 text-white hover:text-purple-300 hover:bg-purple-950/50"
+                              onClick={() => handleLike(item.id)}
+                              disabled={likedItems.has(item.id)}
                             >
                               <Heart size={16} />
                             </Button>
@@ -335,6 +366,10 @@ export default function MainSection() {
                               size="icon"
                               variant="ghost"
                               className="h-8 w-8 text-white hover:text-purple-300 hover:bg-purple-950/50"
+                              onClick={() => {
+                                const link = generateShareableLink(item);
+                                copyToClipboard(link);
+                              }}
                             >
                               <Share2 size={16} />
                             </Button>
@@ -409,6 +444,12 @@ export default function MainSection() {
             <p className="mb-4 text-black">Likes: {selectedItem.likes}</p>
             <Button onClick={closeModal} className="bg-purple-600 hover:bg-purple-700 text-white">Close</Button>
           </div>
+        </div>
+      )}
+
+      {popupMessage && (
+        <div className="fixed bottom-4 right-4 bg-purple-600 text-white p-3 rounded-lg shadow-lg">
+          {popupMessage}
         </div>
       )}
     </>

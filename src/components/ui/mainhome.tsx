@@ -1,17 +1,21 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import FeatureCard from "@/components/featureCard";
-import Globe from "@/components/ui/glove";
 import Avataar from "../../../asset/avatar1.jpeg";
 import Avataar2 from "../../../asset/avatar2.jpeg";
 import Avataar3 from "../../../asset/avatar3.jpeg";
+import FeatureCard from "@/components/feature-card";
 import PricingSection from "@/app/payment/pricing-action";
-import { PromptingIsAllYouNeed } from "@/components/prompting"
+import PromptingIsAllYouNeed from "@/components/prompting";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const [showGallery, setShowGallery] = useState(false);
+  const router = useRouter();
+
   const features = [
     {
       title: "AI-Powered Image Enhancement",
@@ -57,22 +61,56 @@ export default function Home() {
     },
   ];
 
+  const galleryImages = [
+    {
+      src: "/placeholder.svg?height=400&width=600",
+      alt: "AI Enhanced Landscape",
+      title: "Enhanced Landscape",
+    },
+    {
+      src: "/placeholder.svg?height=400&width=600",
+      alt: "Object Removal Example",
+      title: "Object Removal",
+    },
+    {
+      src: "/placeholder.svg?height=400&width=600",
+      alt: "Style Transfer Art",
+      title: "Artistic Style Transfer",
+    },
+    {
+      src: "/placeholder.svg?height=400&width=600",
+      alt: "Color Correction",
+      title: "Color Correction",
+    },
+    {
+      src: "/placeholder.svg?height=400&width=600",
+      alt: "Portrait Enhancement",
+      title: "Portrait Enhancement",
+    },
+    {
+      src: "/placeholder.svg?height=400&width=600",
+      alt: "Background Replacement",
+      title: "Background Replacement",
+    },
+  ];
+
   return (
-    
     <main className="flex min-h-screen flex-col items-center justify-center p-4 mb-3">
-      
       <h1 className="text-6xl font-bold mb-6 text-center">
         Welcome to AI-Powered Gallery
-      </h1> 
+      </h1>
       <PromptingIsAllYouNeed className="mb-10" />
-      {/* <Globe /> */}
       <p className="text-lg text-center mb-8 max-w-1xl leading-relaxed text-gray-00 p-11">
-        🌟 Discover the power of AI in image creation and manipulation. Upload your
-        images and see the magic happen! 
-        🎨 Our AI-Powered Gallery offers a seamless experience where cutting-edge technology meets creativity. 
-        🖼️ Whether you're looking to enhance your photos, remove unwanted elements, or transform your images into stunning pieces of art, our advanced AI tools are designed to cater to all your needs. 
-        🚀 With intuitive features and a user-friendly interface, you can effortlessly explore the endless possibilities of AI-driven image processing.
-        🔓 Join us on this exciting journey and unlock the full potential of your visual content with our state-of-the-art AI solutions.
+        🌟 Discover the power of AI in image creation and manipulation. Upload
+        your images and see the magic happen! 🎨 Our AI-Powered Gallery offers a
+        seamless experience where cutting-edge technology meets creativity. 🖼️
+        Whether you're looking to enhance your photos, remove unwanted elements,
+        or transform your images into stunning pieces of art, our advanced AI
+        tools are designed to cater to all your needs. 🚀 With intuitive
+        features and a user-friendly interface, you can effortlessly explore the
+        endless possibilities of AI-driven image processing. 🔓 Join us on this
+        exciting journey and unlock the full potential of your visual content
+        with our state-of-the-art AI solutions.
       </p>
 
       <Button asChild className="mb-10">
@@ -96,7 +134,6 @@ export default function Home() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           <div>
-            
             <div className="text-4xl mb-4">1. Upload</div>
             <p>Simply upload your image to our AI-powered gallery.</p>
           </div>
@@ -138,6 +175,44 @@ export default function Home() {
               <p className="text-card-foreground">{testimonial.content}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="w-full max-w-4xl mb-16">
+        <h2 className="text-5xl font-semibold mb-6 text-center">Our Gallery</h2>
+        <div className="text-center mb-4">
+          <Button
+            onClick={() => router.push("/gallery-section")}
+            variant="outline"
+            size="lg"
+            className="mb-6"
+          >
+            VIEW GALLERY
+          </Button>
+
+          {showGallery && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-6 animate-fadeIn">
+              {galleryImages.map((image, index) => (
+                <div
+                  key={index}
+                  className="group relative overflow-hidden rounded-lg transition-all duration-300 hover:scale-105"
+                >
+                  <Image
+                    src={image.src || "/placeholder.svg"}
+                    alt={image.alt}
+                    width={600}
+                    height={400}
+                    className="w-full h-64 object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <h3 className="text-white text-xl font-semibold">
+                      {image.title}
+                    </h3>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -192,10 +267,9 @@ export default function Home() {
           <Link href="sign-up">Get Started for Free</Link>
         </Button>
       </section>
-        <Button asChild size="lg">
-          <Link href="MemoryMatchGame">FREE GAME</Link>
-        </Button>
-      
+      <Button asChild size="lg" className="mb-10">
+        <Link href="MemoryMatchGame">FREE GAME</Link>
+      </Button>
     </main>
   );
 }
