@@ -135,7 +135,7 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           <div>
             <div className="text-4xl mb-4">1. Upload</div>
-            <p>Simply upload your image to our AI-powered gallery.</p>
+            <p>Simply  image to our AI-powered gallery.</p>
           </div>
           <div>
             <div className="text-4xl mb-4">2. Process</div>
