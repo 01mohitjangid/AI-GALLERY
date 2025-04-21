@@ -269,28 +269,7 @@ export default function PricingSection() {
         </div>
 
         {/* Testimonials */}
-        <div className="mt-20">
-          <h3 className="text-2xl font-bold mb-8 text-center">
-            What Our Customers Say
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <TestimonialCard
-              quote="This platform has completely transformed how I create visual content. The Pro plan is worth every penny!"
-              author="Sarah Johnson"
-              role="Graphic Designer"
-            />
-            <TestimonialCard
-              quote="The AI image enhancement is mind-blowing. I've saved countless hours on editing and retouching."
-              author="Michael Chen"
-              role="Photographer"
-            />
-            <TestimonialCard
-              quote="As an enterprise customer, the custom solutions and dedicated support have been invaluable for our marketing team."
-              author="Jessica Williams"
-              role="Marketing Director"
-            />
-          </div>
-        </div>
+        {/* what  */}
       </section>
 
       {/* Contact Form Placeholder */}

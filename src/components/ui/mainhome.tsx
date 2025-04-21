@@ -148,37 +148,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full max-w-4xl mb-16">
-        <h2 className="text-5xl font-semibold mb-6 text-center">
-          What Our Users Say
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div key={index} className="bg-card p-6 rounded-lg shadow-md">
-              <div className="flex items-center mb-4">
-                <Image
-                  src={testimonial.avatar || "/placeholder.svg"}
-                  alt={testimonial.name}
-                  width={50}
-                  height={50}
-                  className="rounded-full mr-4"
-                />
-                <div>
-                  <h3 className="font-semibold text-foreground">
-                    {testimonial.name}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {testimonial.role}
-                  </p>
-                </div>
-              </div>
-              <p className="text-card-foreground">{testimonial.content}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/*    */}
 
-      <section className="w-full max-w-4xl mb-16">
+      {/* <section className="w-full max-w-4xl mb-16">
         <h2 className="text-5xl font-semibold mb-6 text-center">Our Gallery</h2>
         <div className="text-center mb-4">
           <Button
@@ -214,7 +186,7 @@ export default function Home() {
             </div>
           )}
         </div>
-      </section>
+      </section> */}
 
       <PricingSection />
 
