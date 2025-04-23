@@ -5,6 +5,8 @@ import { useEffect, useState, useRef } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import axios from "axios";
+import { cn } from "@/lib/utils"
+import Link from "next/link"
 import {
   Download,
   ImageIcon,
@@ -33,14 +35,10 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import {
-  AnimatePresence,
-  useAnimation,
-  useInView,
-} from "framer-motion";
+import { AnimatePresence, useAnimation, useInView } from "framer-motion";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { motion } from "framer-motion";
-
+import ImageGenerator from "@/components/image-generator"
 
 const Home = () => {
   const [userQuery, setUserQuery] = useState("");
@@ -333,6 +331,7 @@ const Home = () => {
           >
             AI IMAGE GALLERY
           </motion.h1>
+          {/* <ImageGenerator /> */}
 
           <motion.p
             variants={textVariants}
@@ -358,6 +357,17 @@ const Home = () => {
             >
               <Sparkles className="w-4 h-4 mr-2" /> AI-Powered
             </Badge>
+            <Link
+              href="/upload-image"
+              className={cn(
+                "transition-colors hover:text-foreground/80"
+                // pathname?.startsWith("/upload-image")
+                //   ? "text-foreground"
+                //   : "text-foreground/60"
+              )}
+            >
+              Upload image
+            </Link>
           </motion.div>
         </motion.div>
 

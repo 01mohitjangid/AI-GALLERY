@@ -114,7 +114,7 @@ export default function Home() {
       </p>
 
       <Button asChild className="mb-10">
-        <Link href="Image-enhancer">ENHANCE IMAGE </Link>
+        <Link href="/ImageGenerator">GENERATE IMAGE </Link>
       </Button>
 
       <section className="w-full max-w-4xl mb-16">
