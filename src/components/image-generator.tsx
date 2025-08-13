@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Loader, Download, Sparkles } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
+import Image from "next/image"
 
 export default function ImageGenerator() {
   const [prompt, setPrompt] = useState("")
@@ -134,10 +135,13 @@ export default function ImageGenerator() {
             </div>
           ) : generatedImage ? (
             <div className="relative w-full h-full flex items-center justify-center">
-              <img
+              <Image
                 src={generatedImage || "/placeholder.svg"}
                 alt="Generated from prompt"
+                width={1024}  // Set appropriate width based on your largest possible image size
+                height={1024} // Set appropriate height based on your largest possible image size
                 className="max-w-full max-h-[400px] object-contain rounded-md shadow-md"
+                priority // Add this if this image is above the fold
               />
             </div>
           ) : (

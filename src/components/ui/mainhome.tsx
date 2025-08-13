@@ -104,7 +104,7 @@ export default function Home() {
         🌟 Discover the power of AI in image creation and manipulation. Upload
         your images and see the magic happen! 🎨 Our AI-Powered Gallery offers a
         seamless experience where cutting-edge technology meets creativity. 🖼️
-        Whether you're looking to enhance your photos, remove unwanted elements,
+        Whether you&apos;re looking to enhance your photos, remove unwanted elements,
         or transform your images into stunning pieces of art, our advanced AI
         tools are designed to cater to all your needs. 🚀 With intuitive
         features and a user-friendly interface, you can effortlessly explore the

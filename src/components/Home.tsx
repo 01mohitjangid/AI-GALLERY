@@ -304,7 +304,7 @@ const Home = () => {
           ref={heroRef}
           initial="hidden"
           animate={heroControls}
-          variants={heroVariants}
+          // variants={heroVariants}
           className="text-center mb-16"
         >
           <motion.div
@@ -326,7 +326,7 @@ const Home = () => {
             </div>
           </motion.div>
           <motion.h1
-            variants={textVariants}
+            // variants={textVariants}
             className="text-6xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 bg-clip-text text-transparent mb-9"
           >
             AI IMAGE GALLERY
@@ -334,15 +334,14 @@ const Home = () => {
           {/* <ImageGenerator /> */}
 
           <motion.p
-            variants={textVariants}
+            // variants={textVariants}
             className="text-gray-600 dark:text-gray-300 text-xl max-w-2xl mx-auto mb-8"
           >
-            Discover the perfect images with our AI-powered search. Simply
-            describe what you're looking for and let our magic find it.
+            Discover the perfect images with our AI-powered search. Simply describe what you&apos;re looking for and let our magic find it.
           </motion.p>
 
           <motion.div
-            variants={textVariants}
+            // variants={textVariants}
             className="flex justify-center space-x-4 mb-8"
           >
             <Badge
@@ -510,7 +509,7 @@ const Home = () => {
             variants={containerVariants}
           >
             <motion.div
-              variants={itemVariants}
+              
               className="flex items-center justify-between mb-6"
             >
               <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
@@ -521,7 +520,7 @@ const Home = () => {
               </Badge>
             </motion.div>
 
-            <motion.div variants={itemVariants}>
+            <motion.div >
               <Tabs
                 defaultValue="table"
                 value={activeTab}
@@ -557,7 +556,7 @@ const Home = () => {
                   <Card className="shadow-lg border-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm">
                     <Table>
                       <TableCaption>
-                        Results for "{userQuery}" sorted by relevance
+                        Results for &ldquo;{userQuery}&rdquo; sorted by relevance
                       </TableCaption>
                       <TableHeader>
                         <TableRow>

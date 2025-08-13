@@ -355,7 +355,7 @@ const TestimonialCard = ({
   role: string;
 }) => (
   <div className="bg-card p-6 rounded-lg border border-border">
-    <p className="italic mb-4">"{quote}"</p>
+    <p className="italic mb-4">&ldquo;{quote}&rdquo;</p>
     <div>
       <p className="font-semibold">{author}</p>
       <p className="text-sm text-muted-foreground">{role}</p>

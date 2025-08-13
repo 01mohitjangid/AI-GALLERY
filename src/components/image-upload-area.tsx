@@ -1,6 +1,7 @@
 "use client"
 
 import { X } from "lucide-react"
+import Image from "next/image"
 
 interface ImageUploadAreaProps {
   previewUrls: string[]
@@ -17,10 +18,14 @@ export default function ImageUploadArea({ previewUrls, onRemoveImage, isLoading 
     <div className="flex flex-wrap gap-2 px-4 pt-3 pointer-events-auto">
       {previewUrls.map((url, index) => (
         <div key={index} className="relative h-16 w-16">
-          <img
+          <Image
             src={url || "/placeholder.svg"}
             alt={`Preview ${index + 1}`}
-            className="h-full w-full object-cover rounded-full"
+            width={64}
+            height={64}
+            className="object-cover rounded-full"
+            fill
+            sizes="64px"
           />
           {!isLoading && (
             <button type="button" onClick={() => onRemoveImage(index)} className="absolute -top-1 -right-1">

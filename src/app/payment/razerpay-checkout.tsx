@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useCallback } from "react"
 import { verifyRazorpayPayment } from "./action"
 
 interface RazorpayCheckoutProps {
@@ -23,8 +23,48 @@ declare global {
 }
 
 export default function RazorpayCheckout({ paymentData, onSuccess, onCancel }: RazorpayCheckoutProps) {
+  const initializeRazorpay = useCallback(() => {
+    const options = {
+      key: paymentData.keyId,
+      amount: paymentData.amount,
+      currency: paymentData.currency,
+      name: "NEURAGALLERY",
+      description: paymentData.description,
+      order_id: paymentData.orderId,
+      handler: async (response: any) => {
+        try {
+          await verifyRazorpayPayment({
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_signature: response.razorpay_signature,
+          })
+
+          onSuccess()
+        } catch (error) {
+          console.error("Payment verification failed:", error)
+        }
+      },
+      prefill: {
+        name: "",
+        email: "",
+        contact: "",
+      },
+      notes: {
+        plan: paymentData.name,
+      },
+      theme: {
+        color: "#6366F1",
+      },
+      modal: {
+        ondismiss: onCancel,
+      },
+    }
+
+    const razorpay = new window.Razorpay(options)
+    razorpay.open()
+  }, [paymentData, onSuccess, onCancel]) // Add dependencies here
+
   useEffect(() => {
-    // Load the Razorpay script
     const script = document.createElement("script")
     script.src = "https://checkout.razorpay.com/v1/checkout.js"
     script.async = true
@@ -35,51 +75,8 @@ export default function RazorpayCheckout({ paymentData, onSuccess, onCancel }: R
     return () => {
       document.body.removeChild(script)
     }
-  }, [])
+  }, [initializeRazorpay]) // Add initializeRazorpay to dependencies
 
-  const initializeRazorpay = () => {
-    const options = {
-      key: paymentData.keyId,
-      amount: paymentData.amount,
-      currency: paymentData.currency,
-      name: "NEURAGALLERY",
-      description: paymentData.description,
-      order_id: paymentData.orderId,
-      handler: async (response: any) => {
-        try {
-          // Verify the payment on the server
-          await verifyRazorpayPayment({
-            razorpay_payment_id: response.razorpay_payment_id,
-            razorpay_order_id: response.razorpay_order_id,
-            razorpay_signature: response.razorpay_signature,
-          })
-
-          onSuccess()
-        } catch (error) {
-          console.error("Payment verification failed:", error)
-          // Show error message to user
-        }
-      },
-      prefill: {
-        name: "", // You can prefill user details if available
-        email: "",
-        contact: "",
-      },
-      notes: {
-        plan: paymentData.name,
-      },
-      theme: {
-        color: "#6366F1", // Match your primary color
-      },
-      modal: {
-        ondismiss: onCancel,
-      },
-    }
-
-    const razorpay = new window.Razorpay(options)
-    razorpay.open()
-  }
-
-  return null // This component doesn't render anything
+  return null
 }
 

@@ -75,7 +75,7 @@ export default function ContactForm({ className }: ContactFormProps) {
             Contact PromptAI Gallery
           </CardTitle>
           <CardDescription>
-            Fill out the form below and we'll get back to you as soon as
+            Fill out the form below and we&apos;ll get back to you as soon as
             possible.
           </CardDescription>
         </CardHeader>
@@ -87,7 +87,7 @@ export default function ContactForm({ className }: ContactFormProps) {
                 Thank you for your message!
               </h3>
               <p className="text-center text-muted-foreground">
-                We've received your inquiry and will get back to you shortly.
+                We&apos;ve received your inquiry and will get back to you shortly.
               </p>
               <Button onClick={() => setIsSubmitted(false)}>
                 Send another message

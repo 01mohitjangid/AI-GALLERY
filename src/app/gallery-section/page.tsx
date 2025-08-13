@@ -11,6 +11,7 @@ import Portrait from '../../../asset/gallery-section/Digital Portrait.jpg'
 import Generator from '../../../asset/gallery-section/Story Generator.jpg'
 import Particle from '../../../asset/gallery-section/Particle Flow.jpg'
 import Link from 'next/link'
+import Image from 'next/image'
 
 type GalleryItem = {
   id: number;
@@ -334,9 +335,11 @@ export default function MainSection() {
                   className="bg-gray-900/50 backdrop-blur-sm rounded-xl overflow-hidden border border-purple-500/10 group"
                 >
                   <div className="relative overflow-hidden">
-                    <img
+                    <Image
                       src={item.image || "/placeholder.svg"}
                       alt={item.title}
+                      width={400}  // Add appropriate width
+                      height={256} // height={64} from your original className h-64
                       className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">

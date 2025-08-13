@@ -184,7 +184,7 @@ export default function DashboardPage() {
                 <Card className="col-span-4">
                   <CardHeader>
                     <CardTitle>Overview</CardTitle>
-                    <CardDescription>Year of the user's join</CardDescription>
+                    <CardDescription>Year of the user&apos;s join</CardDescription>
                   </CardHeader>
                   <CardContent className="pl-2">
                     <Overview />
