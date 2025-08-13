@@ -329,7 +329,7 @@ export default function AIPreloader({
     }, 2000)
 
     return () => clearInterval(textInterval)
-  }, [loadingPhrases.length]) // Add loadingPhrases.length to the dependency array
+  }, [loadingPhrases.length])
 
   // Calculate interactive glow position
   const calculateGlowPosition = () => {
