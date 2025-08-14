@@ -1,7 +1,5 @@
-
-
 import type React from "react"
-
+import Image from "next/image"
 import { useState, useRef, useEffect } from "react"
 import { Slider } from "@/components/ui/slider"
 import { Button } from "@/components/ui/button"
@@ -42,7 +40,7 @@ export default function ImageEnhancer() {
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
-    const img = new Image()
+    const img = new window.Image()
     img.crossOrigin = "anonymous"
     img.src = image
 
@@ -95,7 +93,7 @@ export default function ImageEnhancer() {
         <CardHeader>
           <CardTitle>Image Enhancer</CardTitle>
           <CardDescription>
-            Upload an image and adjust the settings to enhance it. When you're satisfied, download the result.
+            Upload an image and adjust the settings to enhance it. When you&apos;re satisfied, download the result.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -198,10 +196,13 @@ export default function ImageEnhancer() {
             <div className="space-y-4">
               {enhancedImage ? (
                 <div className="border rounded-lg overflow-hidden">
-                  <img
-                    src={enhancedImage || "/placeholder.svg"}
+                  <Image
+                    src={enhancedImage}
                     alt="Enhanced"
+                    width={400}
+                    height={400}
                     className="w-full h-auto object-contain max-h-[400px]"
+                    unoptimized
                   />
                 </div>
               ) : (
@@ -229,4 +230,3 @@ export default function ImageEnhancer() {
     </div>
   )
 }
-

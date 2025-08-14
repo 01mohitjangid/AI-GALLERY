@@ -5,7 +5,6 @@ import ContactForm from "./contact-form"
 import ModelViewer from "@/components/model-viewer"
 
 export default function ContactPage() {
-
   const [modelUrl, setModelUrl] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -32,7 +31,7 @@ export default function ContactPage() {
        <div className="container mx-auto px-4 py-12">
         <h1 className="text-4xl font-bold text-center mb-8 text-black dark:text-white">Contact Us</h1>
         <p className="text-center text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-12">
-          Have questions about PromptAI Gallery or need custom AI prompts? We're here to help you get the most out of AI
+          Have questions about PromptAI Gallery or need custom AI prompts? We&apos;re here to help you get the most out of AI
           technology.
         </p>
         <div className="flex justify-center mb-12">
@@ -48,4 +47,3 @@ export default function ContactPage() {
     </main>
   )
 }
-

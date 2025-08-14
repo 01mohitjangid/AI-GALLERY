@@ -16,7 +16,7 @@ export async function generateImage(prompt: string, size = "1024x1024"): Promise
       size: size as "1024x1024" | "1024x1792" | "1792x1024",
     })
 
-    return response.data[0].url || ""
+     return response.data?.[0]?.url || ""
   } catch (error) {
     console.error("Error generating image:", error)
     throw new Error("Failed to generate image")
